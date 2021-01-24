@@ -1,0 +1,24 @@
+		# wget https://www.python.org/ftp/python/3.5.1/Python-3.5.1.tgz	//下载压缩包
+		# tar -zxvf Python-3.5.1.tgz	//解压缩
+		# cd Python-3.5.1/	//进入安装目录
+		# ./configure 	//安装配置
+		# make	
+		# make install	//编译&安装
+————————————————
+
+备份
+mv /usr/bin/openssl /usr/bin/openssl.bak
+mv /usr/include/openssl/ /usr/include/openssl.bak
+
+#将安装好的openssl 的openssl命令软连到/usr/bin/openssl
+[root@s2-hadoop-test ~]# ln -s /usr/local/openssl/include/openssl /usr/include/openssl
+#软链到升级后的libssl.so
+[root@s2-hadoop-test ~]# ln -s /usr/local/openssl/lib/libssl.so.1.1 /usr/local/lib64/libssl.so
+
+#将安装好的openssl命令软连到/usr/bin/openssl
+ln -s /usr/local/openssl/bin/openssl /usr/bin/openssl
+
+#写入openssl库文件的搜索路径
+echo "/usr/local/openssl/lib" >> /etc/ld.so.conf
+#使修改后的/etc/ld.so.conf生效 
+ldconfig -v
